@@ -1,6 +1,6 @@
 # Marketing Analytics Warehouse (dbt + DuckDB)
 
-Projet portfolio orienté recrutement pour démontrer:
+Projet analytics local pour démontrer:
 - modélisation analytique en **star schema**
 - transformation locale avec **dbt**
 - qualité des données via **tests**
@@ -44,9 +44,13 @@ Projet portfolio orienté recrutement pour démontrer:
 - `seeds/`: données marketing d'exemple
 - `models/staging/`: normalisation des seeds
 - `models/marts/`: dimensions + table de faits
-- `analyses/`: requêtes SQL de démonstration (interview / portfolio)
+- `analyses/`: requêtes SQL de démonstration métier
 - `tests/`: tests métier complémentaires
 - `docs/`: notes fonctionnelles
+
+Documents utiles:
+- `docs/insights.md`: synthèse business des performances marketing
+- `docs/warehouse_notes.md`: choix de modélisation et orientations techniques
 
 ## Résultats analytiques inclus
 `fact_marketing_performance` expose:
