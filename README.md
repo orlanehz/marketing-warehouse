@@ -44,6 +44,7 @@ Projet portfolio orienté recrutement pour démontrer:
 - `seeds/`: données marketing d'exemple
 - `models/staging/`: normalisation des seeds
 - `models/marts/`: dimensions + table de faits
+- `analyses/`: requêtes SQL de démonstration (interview / portfolio)
 - `tests/`: tests métier complémentaires
 - `docs/`: notes fonctionnelles
 
@@ -60,3 +61,16 @@ dbt build        # seed + run + test
 dbt ls           # liste des ressources
 dbt docs generate
 ```
+
+## Demo analyses
+Fichiers fournis dans `analyses/`:
+- `01_channel_performance_summary.sql`
+- `02_campaign_efficiency_ranking.sql`
+- `03_daily_kpi_trend.sql`
+- `04_objective_channel_mix.sql`
+
+Compiler toutes les analyses:
+```bash
+dbt compile --select path:analyses/*
+```
+Les SQL compilées sont ensuite visibles dans `target/compiled/`.

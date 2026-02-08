@@ -1,7 +1,7 @@
 # Notes de conception
 
 ## Pourquoi ce modèle
-- Priorité au cas d'usage recruteur: un pipeline simple, clair et testable.
+- Priorité au cas d'usage: un pipeline simple, clair et testable.
 - Star schema pour illustrer les bonnes pratiques BI classiques.
 - Grain explicite au niveau de la fact pour éviter les ambiguïtés.
 
