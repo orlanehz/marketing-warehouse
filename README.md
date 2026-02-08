@@ -1,18 +1,18 @@
 # Marketing Analytics Warehouse (dbt + DuckDB)
 
 Projet analytics local pour démontrer:
-- modélisation analytique en **star schema**
+- modélisation analytique en **schéma en étoile**
 - transformation locale avec **dbt**
 - qualité des données via **tests**
 - documentation navigable via **dbt docs**
 
-## Stack
+## Technologies
 - Python 3.10+
 - dbt-core
 - dbt-duckdb
 - DuckDB (fichier local, sans cloud)
 
-## Star schema
+## Schéma en étoile
 - **Fact**: `fact_marketing_performance` (grain: `campaign_id` x `channel_id` x `date_day`)
 - **Dimensions**: `dim_campaign`, `dim_channel`, `dim_date`
 
@@ -23,7 +23,7 @@ Projet analytics local pour démontrer:
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-2. Configurer le profile dbt:
+2. Configurer le profil dbt:
    ```bash
    mkdir -p ~/.dbt
    cp profiles.yml.example ~/.dbt/profiles.yml
@@ -42,14 +42,14 @@ Projet analytics local pour démontrer:
 
 ## Structure
 - `seeds/`: données marketing d'exemple
-- `models/staging/`: normalisation des seeds
+- `models/staging/`: normalisation des données sources
 - `models/marts/`: dimensions + table de faits
 - `analyses/`: requêtes SQL de démonstration métier
 - `tests/`: tests métier complémentaires
 - `docs/`: notes fonctionnelles
 
 Documents utiles:
-- `docs/insights.md`: synthèse business des performances marketing
+- `docs/insights.md`: synthèse métier des performances marketing
 - `docs/warehouse_notes.md`: choix de modélisation et orientations techniques
 
 ## Résultats analytiques inclus
@@ -66,7 +66,7 @@ dbt ls           # liste des ressources
 dbt docs generate
 ```
 
-## Demo analyses
+## Analyses exploratoires
 Fichiers fournis dans `analyses/`:
 - `01_channel_performance_summary.sql`
 - `02_campaign_efficiency_ranking.sql`

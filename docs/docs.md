@@ -1,5 +1,5 @@
 {% docs project_pitch %}
-Ce projet montre une chaîne analytics locale de bout en bout: ingestion de données marketing, modélisation star schema, contrôles qualité, et documentation dbt.
+Ce projet montre une chaîne analytique locale de bout en bout: ingestion de données marketing, modélisation en schéma en étoile, contrôles qualité et documentation dbt.
 {% enddocs %}
 
 {% docs fact_marketing_performance %}
