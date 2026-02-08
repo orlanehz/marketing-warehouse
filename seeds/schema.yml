@@ -1,0 +1,28 @@
+version: 2
+
+seeds:
+  - name: raw_channels
+    description: Référentiel des canaux marketing.
+    columns:
+      - name: channel_id
+        tests: [unique, not_null]
+      - name: channel_name
+        tests: [not_null]
+
+  - name: raw_campaigns
+    description: Référentiel des campagnes.
+    columns:
+      - name: campaign_id
+        tests: [unique, not_null]
+      - name: campaign_name
+        tests: [not_null]
+
+  - name: raw_campaign_channel_daily
+    description: Performance journalière brute campagne/canal.
+    columns:
+      - name: date_day
+        tests: [not_null]
+      - name: campaign_id
+        tests: [not_null]
+      - name: channel_id
+        tests: [not_null]

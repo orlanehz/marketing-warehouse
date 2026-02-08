@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: marketing_exec_dashboard
+    label: Marketing Executive Dashboard
+    type: dashboard
+    maturity: medium
+    url: https://example.local/dashboard/marketing
+    description: Tableau de bord pour suivre efficacité média et rentabilité des campagnes.
+    depends_on:
+      - ref('fact_marketing_performance')
+      - ref('dim_campaign')
+      - ref('dim_channel')
+      - ref('dim_date')
+    owner:
+      name: Marketing Analytics
+      email: analytics@example.local

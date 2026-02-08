@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: dim_channel
+    description: Dimension des canaux marketing.
+    columns:
+      - name: channel_id
+        tests: [not_null, unique]
+      - name: channel_name
+        tests: [not_null]
+      - name: channel_group
+        tests: [not_null]
+
+  - name: dim_campaign
+    description: Dimension des campagnes marketing.
+    columns:
+      - name: campaign_id
+        tests: [not_null, unique]
+      - name: campaign_name
+        tests: [not_null]
+      - name: objective
+        tests: [not_null]
+
+  - name: dim_date
+    description: Dimension calendaire journalière.
+    columns:
+      - name: date_day
+        tests: [not_null, unique]
+      - name: year
+        tests: [not_null]
+      - name: month
+        tests: [not_null]
+
+  - name: fact_marketing_performance
+    description: "{{ doc('fact_marketing_performance') }}"
+    columns:
+      - name: date_day
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+      - name: campaign_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_campaign')
+                field: campaign_id
+      - name: channel_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channel')
+                field: channel_id
+      - name: impressions
+        tests: [not_null]
+      - name: clicks
+        tests: [not_null]
+      - name: conversions
+        tests: [not_null]
+      - name: spend
+        tests: [not_null]
+      - name: revenue
+        tests: [not_null]
+      - name: ctr
+        description: "{{ doc('metric_ctr') }}"
+      - name: cpc
+        description: "{{ doc('metric_cpc') }}"
+      - name: roas
+        description: "{{ doc('metric_roas') }}"
