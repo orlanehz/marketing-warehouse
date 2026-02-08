@@ -66,6 +66,21 @@ dbt ls           # liste des ressources
 dbt docs generate
 ```
 
+## Visualisation locale avec Metabase
+Un setup Docker est disponible dans `metabase/` pour connecter Metabase à `warehouse.duckdb`.
+
+Lancement rapide:
+```bash
+cd metabase
+cp .env.example .env
+docker compose up -d --build
+```
+
+Puis ouvrir `http://localhost:3000` et connecter DuckDB avec le chemin:
+`/data/warehouse.duckdb`
+
+Le fichier DuckDB monté est configurable dans `metabase/.env` via `DUCKDB_FILE`.
+
 ## Analyses exploratoires
 Fichiers fournis dans `analyses/`:
 - `01_channel_performance_summary.sql`
