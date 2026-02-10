@@ -12,8 +12,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              arguments:
-                values: ['Paid Search', 'Paid Social', 'Owned', 'Organic']
+              values: ['Paid Search', 'Paid Social', 'Owned', 'Organic']
 
   - name: stg_campaigns
     description: Normalisation des campagnes marketing.
@@ -26,8 +25,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              arguments:
-                values: ['Acquisition', 'Conversion', 'Retention']
+              values: ['Acquisition', 'Conversion', 'Retention']
       - name: start_date
         tests: [not_null]
       - name: end_date
@@ -42,16 +40,14 @@ models:
         tests:
           - not_null
           - relationships:
-              arguments:
-                to: ref('stg_campaigns')
-                field: campaign_id
+              to: ref('stg_campaigns')
+              field: campaign_id
       - name: channel_id
         tests:
           - not_null
           - relationships:
-              arguments:
-                to: ref('stg_channels')
-                field: channel_id
+              to: ref('stg_channels')
+              field: channel_id
       - name: impressions
         tests: [not_null]
       - name: clicks
