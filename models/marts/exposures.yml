@@ -5,8 +5,9 @@ exposures:
     label: Marketing Executive Dashboard
     type: dashboard
     maturity: medium
-    url: https://example.local/dashboard/marketing
-    description: Tableau de bord pour suivre efficacité média et rentabilité des campagnes.
+    url: http://localhost:3000/dashboard/2-marketing-analytics-report
+    description: |
+      {{ doc('project_pitch') }}
     depends_on:
       - ref('fact_marketing_performance')
       - ref('dim_campaign')
@@ -14,4 +15,4 @@ exposures:
       - ref('dim_date')
     owner:
       name: Marketing Analytics
-      email: analytics@example.local
+      email: orlanehouzetdata@gmail.com

@@ -1,6 +1,6 @@
 # Marketing Analytics Warehouse (dbt + DuckDB)
 
-Projet analytics local pour démontrer:
+Projet local pour démontrer:
 - modélisation analytique en **schéma en étoile**
 - transformation locale avec **dbt**
 - qualité des données via **tests**
@@ -13,7 +13,7 @@ Projet analytics local pour démontrer:
 - DuckDB (fichier local, sans cloud)
 
 ## Schéma en étoile
-- **Fact**: `fact_marketing_performance` (grain: `campaign_id` x `channel_id` x `date_day`)
+- **Fact**: `fact_marketing_performance` (granularité: `campaign_id` x `channel_id` x `date_day`)
 - **Dimensions**: `dim_campaign`, `dim_channel`, `dim_date`
 
 ## Démarrage rapide
