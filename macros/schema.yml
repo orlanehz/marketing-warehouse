@@ -1,0 +1,28 @@
+version: 2
+
+macros:
+  - name: kpi_ctr
+    description: "{{ doc('macro_kpi_ctr') }}"
+    arguments:
+      - name: clicks_col
+        type: string
+        description: Expression SQL du nombre de clics.
+      - name: impressions_col
+        type: string
+        description: Expression SQL du nombre d'impressions.
+      - name: precision
+        type: integer
+        description: "Nombre de décimales du résultat (défaut: 4)."
+
+  - name: kpi_cpc
+    description: "{{ doc('macro_kpi_cpc') }}"
+    arguments:
+      - name: spend_col
+        type: string
+        description: Expression SQL de la dépense.
+      - name: clicks_col
+        type: string
+        description: Expression SQL du nombre de clics.
+      - name: precision
+        type: integer
+        description: "Nombre de décimales du résultat (défaut: 4)."

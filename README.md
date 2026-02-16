@@ -3,6 +3,8 @@
 Projet local pour démontrer:
 - modélisation analytique en **schéma en étoile**
 - transformation locale avec **dbt**
+- réutilisation de logique SQL via **macros**
+- historisation des dimensions via **snapshots**
 - qualité des données via **tests**
 - documentation navigable via **dbt docs**
 
@@ -44,6 +46,8 @@ Projet local pour démontrer:
 - `seeds/`: données marketing d'exemple
 - `models/staging/`: normalisation des données sources
 - `models/marts/`: dimensions + table de faits
+- `macros/`: macros SQL/Jinja réutilisables (ex: calculs KPI)
+- `snapshots/`: historisation des changements de dimensions
 - `analyses/`: requêtes SQL de démonstration métier
 - `tests/`: tests métier complémentaires
 - `docs/`: notes fonctionnelles
@@ -59,11 +63,17 @@ Documents utiles:
 - `cpc` (cost-per-click)
 - `roas` (return-on-ad-spend)
 
+Note de modélisation:
+- `fact_marketing_performance` est matérialisée en `incremental` (delta sur `date_day`, granularité `date_day x campaign_id x channel_id`).
+
 ## Commandes utiles
 ```bash
 dbt build        # seed + run + test
+dbt snapshot     # historise les campagnes (SCD2)
+dbt run --select fact_marketing_performance --full-refresh
 dbt ls           # liste des ressources
 dbt docs generate
+dbt docs serve
 ```
 
 ## Visualisation locale avec Metabase
