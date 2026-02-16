@@ -1,4 +1,4 @@
-# Marketing Analytics Warehouse (dbt + DuckDB)
+# Marketing Analytics Warehouse (dbt + DuckDB + Metabase)
 
 Projet local pour démontrer:
 - modélisation analytique en **schéma en étoile**
