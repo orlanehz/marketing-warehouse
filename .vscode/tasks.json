@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dbt: deps (core)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/dbt",
+      "args": ["deps"]
+    },
+    {
+      "label": "dbt: build (core)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/dbt",
+      "args": ["build"]
+    },
+    {
+      "label": "dbt: test (core)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/dbt",
+      "args": ["test"]
+    },
+    {
+      "label": "dbt: docs generate (core)",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/dbt",
+      "args": ["docs", "generate"]
+    }
+  ]
+}

@@ -1,20 +1,32 @@
-.PHONY: install seed run test build docs
+VENV_BIN := .venv/bin
+DBT := $(VENV_BIN)/dbt
+
+.PHONY: install check-dbt deps seed run test build docs
 
 install:
 	python3 -m venv .venv
 	. .venv/bin/activate && pip install -r requirements.txt
 
-seed:
-	dbt seed
+check-dbt:
+	@if [ ! -x "$(DBT)" ]; then \
+		echo "Error: $(DBT) not found. Run 'make install' first."; \
+		exit 1; \
+	fi
 
-run:
-	dbt run
+deps: check-dbt
+	$(DBT) deps
 
-test:
-	dbt test
+seed: check-dbt
+	$(DBT) seed
 
-build:
-	dbt build
+run: check-dbt
+	$(DBT) run
 
-docs:
-	dbt docs generate
+test: check-dbt
+	$(DBT) test
+
+build: check-dbt
+	$(DBT) build
+
+docs: check-dbt
+	$(DBT) docs generate
