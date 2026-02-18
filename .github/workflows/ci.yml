@@ -1,0 +1,41 @@
+name: dbt CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  dbt-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<'EOF'
+          marketing_warehouse:
+            target: ci
+            outputs:
+              ci:
+                type: duckdb
+                path: "${{ github.workspace }}/warehouse.duckdb"
+                threads: 4
+          EOF
+
+      - name: dbt deps
+        run: dbt deps
+
+      - name: dbt build
+        run: dbt build

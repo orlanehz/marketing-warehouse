@@ -1,0 +1,2 @@
+# Daily run at 07:00 (Europe/Paris local machine time)
+0 7 * * * /Users/orlanehouzet/Le\ Fil\ Data/Data/marketing-warehouse/scripts/daily_refresh.sh >> /Users/orlanehouzet/Le\ Fil\ Data/Data/marketing-warehouse/logs/cron_daily_refresh.log 2>&1

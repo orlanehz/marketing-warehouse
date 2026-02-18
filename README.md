@@ -76,6 +76,53 @@ dbt docs generate
 dbt docs serve
 ```
 
+## Workflow recommandé: dbt-core + Makefile
+Prérequis:
+```bash
+make install
+mkdir -p ~/.dbt
+cp profiles.yml.example ~/.dbt/profiles.yml
+```
+
+Exécution locale:
+```bash
+make deps
+make build
+make snapshot
+make docs
+make daily
+```
+
+Le `Makefile` centralise les commandes dbt:
+- `make deps`: installe les packages dbt (`dbt deps`)
+- `make seed`: charge les seeds
+- `make run`: exécute les modèles
+- `make test`: lance les tests
+- `make build`: exécute `seed + run + test`
+- `make snapshot`: historise les dimensions (SCD2)
+- `make docs`: génère la documentation dbt
+- `make daily`: exécute `deps + build + snapshot` (job quotidien)
+
+## CI GitHub Actions
+Le projet inclut un workflow CI dans `.github/workflows/ci.yml`:
+- déclenchement sur `push` et `pull_request`
+- installation Python + dépendances
+- exécution `dbt deps` puis `dbt build`
+
+## Scheduled job (cron)
+Deux exemples sont fournis:
+- GitHub Actions cron dans `.github/workflows/scheduled-job.yml`
+- Cron local via `ops/cron/marketing_warehouse.cron`
+
+Note:
+- GitHub Actions `schedule.cron` est en UTC (`0 6 * * *` = `07:00` en hiver, `08:00` en été en France).
+
+Pour installer le cron local:
+```bash
+chmod +x scripts/daily_refresh.sh
+crontab ops/cron/marketing_warehouse.cron
+```
+
 ## Visualisation locale avec Metabase
 Un setup Docker est disponible dans `metabase/` pour connecter Metabase à `warehouse.duckdb`.
 

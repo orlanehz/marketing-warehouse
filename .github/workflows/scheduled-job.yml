@@ -1,0 +1,41 @@
+name: dbt Scheduled Job
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  daily-refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<'EOF'
+          marketing_warehouse:
+            target: ci
+            outputs:
+              ci:
+                type: duckdb
+                path: "${{ github.workspace }}/warehouse.duckdb"
+                threads: 4
+          EOF
+
+      - name: dbt deps + build + snapshot
+        run: |
+          dbt deps
+          dbt build
+          dbt snapshot
