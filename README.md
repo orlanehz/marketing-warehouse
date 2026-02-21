@@ -120,6 +120,11 @@ Note:
 - GitHub Actions `schedule.cron` est en UTC (`0 6 * * *` = `07:00` en hiver, `08:00` en été en France).
 - Le workflow scheduled envoie un email en cas d'échec (uniquement pour l'événement `schedule`).
 
+Résumé d'exécution:
+- Tous les matins (via GitHub Actions `schedule`): `make daily` (`dbt deps` + `dbt build` + `dbt snapshot`).
+- CI GitHub (`.github/workflows/ci.yml`): déclenchée sur `push` et `pull_request` (pas sur le schedule), exécute `make deps build`.
+- Le cron GitHub Actions est suffisant pour ce projet local/simple; pour des orchestrations plus complexes (dépendances multi-pipelines, backfills, SLA, observabilité avancée), un orchestrateur dédié comme Airflow/Dagster est plus adapté.
+
 Secrets GitHub à créer pour l'alerte email:
 - `SMTP_HOST` (ex: `smtp.gmail.com`)
 - `SMTP_PORT` (ex: `465` ou `587`)
