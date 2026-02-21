@@ -44,7 +44,7 @@ jobs:
           EOF
 
       - name: Daily refresh via Makefile
-        run: false
+        run: make daily
 
       - name: Upload dbt artifacts
         if: always()
