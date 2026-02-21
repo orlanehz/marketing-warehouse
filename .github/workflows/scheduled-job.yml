@@ -57,3 +57,26 @@ jobs:
             target/catalog.json
             logs/
           if-no-files-found: ignore
+
+      - name: Send failure email alert
+        if: failure() && github.event_name == 'schedule'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_HOST }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "[ALERT] dbt scheduled job failed - ${{ github.repository }}"
+          to: ${{ secrets.ALERT_EMAIL_TO }}
+          from: ${{ secrets.ALERT_EMAIL_FROM }}
+          body: |
+            The scheduled dbt workflow failed.
+
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Run ID: ${{ github.run_id }}
+            Run number: ${{ github.run_number }}
+            Commit: ${{ github.sha }}
+
+            Run URL:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

@@ -118,6 +118,15 @@ Deux exemples sont fournis:
 
 Note:
 - GitHub Actions `schedule.cron` est en UTC (`0 6 * * *` = `07:00` en hiver, `08:00` en été en France).
+- Le workflow scheduled envoie un email en cas d'échec (uniquement pour l'événement `schedule`).
+
+Secrets GitHub à créer pour l'alerte email:
+- `SMTP_HOST` (ex: `smtp.gmail.com`)
+- `SMTP_PORT` (ex: `465` ou `587`)
+- `SMTP_USERNAME`
+- `SMTP_PASSWORD`
+- `ALERT_EMAIL_FROM`
+- `ALERT_EMAIL_TO`
 
 Pour installer le cron local:
 ```bash
