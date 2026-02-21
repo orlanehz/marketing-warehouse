@@ -106,8 +106,10 @@ Le `Makefile` centralise les commandes dbt:
 ## CI GitHub Actions
 Le projet inclut un workflow CI dans `.github/workflows/ci.yml`:
 - déclenchement sur `push` et `pull_request`
-- installation Python + dépendances
-- exécution `dbt deps` puis `dbt build`
+- installation Python + dépendances via `make install`
+- exécution `make deps build`
+- upload des artefacts dbt (`manifest.json`, `run_results.json`, logs)
+- `timeout` et `concurrency` pour limiter les exécutions en conflit
 
 ## Scheduled job (cron)
 Deux exemples sont fournis:
@@ -120,8 +122,14 @@ Note:
 Pour installer le cron local:
 ```bash
 chmod +x scripts/daily_refresh.sh
-crontab ops/cron/marketing_warehouse.cron
+chmod +x scripts/install_cron.sh
+scripts/install_cron.sh
 ```
+
+Le script `scripts/daily_refresh.sh` ajoute des garde-fous légers:
+- lock anti-chevauchement (évite deux runs simultanés)
+- vérification de `dbt` dans `.venv`
+- retry automatique (1 retry après 30s) avant échec final
 
 ## Visualisation locale avec Metabase
 Un setup Docker est disponible dans `metabase/` pour connecter Metabase à `warehouse.duckdb`.

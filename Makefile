@@ -1,7 +1,7 @@
 VENV_BIN := .venv/bin
 DBT := $(VENV_BIN)/dbt
 
-.PHONY: install check-dbt deps seed run snapshot test build docs daily
+.PHONY: install check-dbt deps seed run snapshot test build docs daily install-cron
 
 install:
 	python3 -m venv .venv
@@ -35,3 +35,6 @@ docs: check-dbt
 	$(DBT) docs generate
 
 daily: deps build snapshot
+
+install-cron:
+	./scripts/install_cron.sh

@@ -1,2 +1,4 @@
-# Daily run at 07:00 (Europe/Paris local machine time)
-0 7 * * * /Users/orlanehouzet/Le\ Fil\ Data/Data/marketing-warehouse/scripts/daily_refresh.sh >> /Users/orlanehouzet/Le\ Fil\ Data/Data/marketing-warehouse/logs/cron_daily_refresh.log 2>&1
+# Template: replace <REPO_ROOT> with the absolute repository path.
+# Example:
+# 0 7 * * * /absolute/path/scripts/daily_refresh.sh >> /absolute/path/logs/cron_daily_refresh.log 2>&1
+0 7 * * * <REPO_ROOT>/scripts/daily_refresh.sh >> <REPO_ROOT>/logs/cron_daily_refresh.log 2>&1
